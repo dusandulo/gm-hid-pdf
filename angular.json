@@ -131,7 +131,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-            "baseHref": "/pdf-generator-gmhid/",
+            "baseHref": "/gm-hid-pdf/",
             "name": "GitHub Deployment",
             "email": "your.email@example.com"
           }

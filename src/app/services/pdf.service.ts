@@ -12,20 +12,33 @@ export class PdfService {
   // Primary API endpoint - Azure hosted backend
   private primaryApiUrl = 'https://pdf-generator-backend-hefpaqc4ckaeatae.germanywestcentral-01.azurewebsites.net/api/pdf';
   
+  // CORS Proxy URL for GitHub Pages deployment
+  private corsProxyUrl = 'https://corsproxy.io/?';
+  
   // The URL to use for API calls
   private apiUrl: string;
 
   constructor(private http: HttpClient) {
-    // Initialize with the primary API URL
-    this.apiUrl = this.primaryApiUrl;
+    // Check if we're running on GitHub Pages
+    const isGitHubPages = window.location.hostname === 'dusandulo.github.io';
+    
+    // Use CORS proxy for GitHub Pages, direct connection otherwise
+    this.apiUrl = isGitHubPages 
+      ? `${this.corsProxyUrl}${encodeURIComponent(this.primaryApiUrl)}` 
+      : this.primaryApiUrl;
     
     console.log('PDF SERVICE INITIALIZED - USING:', this.apiUrl);
   }
 
   generatePdf(formData: PdfFormData): Observable<Blob> {
-    console.log('Generating PDF using:', this.apiUrl);
+    // For GitHub Pages, we need to adjust the endpoint with CORS proxy
+    const endpoint = window.location.hostname === 'dusandulo.github.io'
+      ? `${this.apiUrl}/generate`
+      : `${this.apiUrl}/generate`;
+      
+    console.log('Generating PDF using endpoint:', endpoint);
     
-    return this.http.post(`${this.apiUrl}/generate`, formData, {
+    return this.http.post(endpoint, formData, {
       responseType: 'blob'
     }).pipe(
       tap(() => console.log('PDF generation SUCCESS')),
@@ -38,9 +51,14 @@ export class PdfService {
   }
 
   generateRacun(formData: PdfFormData): Observable<Blob> {
-    console.log('Generating Racun using:', this.apiUrl);
+    // For GitHub Pages, we need to adjust the endpoint with CORS proxy
+    const endpoint = window.location.hostname === 'dusandulo.github.io'
+      ? `${this.apiUrl}/generate-racun`
+      : `${this.apiUrl}/generate-racun`;
+      
+    console.log('Generating Racun using endpoint:', endpoint);
     
-    return this.http.post(`${this.apiUrl}/generate-racun`, formData, {
+    return this.http.post(endpoint, formData, {
       responseType: 'blob'
     }).pipe(
       tap(() => console.log('Racun generation SUCCESS')),

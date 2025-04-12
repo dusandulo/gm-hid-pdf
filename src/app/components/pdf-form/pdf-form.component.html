@@ -1,0 +1,409 @@
+<div
+  class="min-h-screen bg-gradient-to-br from-gray-50 to-primary-50 py-8 px-4 sm:px-6 lg:px-8 animate-fade-in"
+>
+  <div class="max-w-4xl mx-auto">
+    <div class="flex flex-col items-center mb-8">
+      <img src="assets/logo.png" alt="Logo" class="h-16 mb-3" />
+      <h1 class="text-3xl font-bold text-center">
+        <span
+          class="bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent"
+          >Generisanje ponude</span
+        >
+      </h1>
+    </div>
+
+    <div
+      class="bg-white shadow-xl rounded-2xl p-6 md:p-8 border border-gray-200"
+    >
+      <form (ngSubmit)="onSubmit()" class="space-y-6">
+        <div
+          class="bg-primary-50 p-4 rounded-lg border-l-4 border-primary-500 transition-all duration-300 hover:shadow-md"
+        >
+          <label class="block text-sm font-medium text-primary-800 mb-1"
+            >Predmet ponude</label
+          >
+          <input
+            class="w-full px-4 py-3 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+            [(ngModel)]="formData.subject"
+            name="subject"
+            required
+          />
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <h3 class="text-lg font-semibold text-gray-800">Stavke</h3>
+            <div
+              class="h-0.5 flex-grow bg-gradient-to-r from-primary-500 to-transparent ml-3"
+            ></div>
+          </div>
+
+          <div class="grid grid-cols-12 gap-3 px-3 mb-1">
+            <div class="col-span-5 text-sm font-medium text-primary-800">
+              Opis
+            </div>
+            <div class="col-span-2 text-sm font-medium text-primary-800">
+              Količina
+            </div>
+            <div class="col-span-3 text-sm font-medium text-primary-800">
+              Cena (RSD)
+            </div>
+            <div class="col-span-2"></div>
+          </div>
+
+          <div class="space-y-3">
+            <div
+              *ngFor="let item of formData.items; let i = index"
+              class="grid grid-cols-12 gap-3 items-center p-3 rounded-lg bg-gray-50 border border-gray-200 hover:shadow-md transition-all duration-200 transform hover:-translate-y-1"
+            >
+              <input
+                class="col-span-5 px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500"
+                [(ngModel)]="item.description"
+                name="desc{{ i }}"
+                placeholder="Opis"
+                required
+              />
+              <input
+                type="number"
+                class="col-span-2 px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500"
+                [(ngModel)]="item.quantity"
+                name="qty{{ i }}"
+                placeholder="Količina"
+                required
+              />
+              <input
+                type="number"
+                class="col-span-3 px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500"
+                [(ngModel)]="item.price"
+                name="price{{ i }}"
+                placeholder="Cena"
+                required
+              />
+              <button
+                type="button"
+                class="col-span-2 flex items-center justify-center px-3 py-2 rounded-lg bg-red-500 hover:bg-red-600 text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200"
+                (click)="removeItem(i)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="flex items-center px-4 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-200"
+            (click)="addItem()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Dodaj stavku
+          </button>
+
+          <div
+            class="mt-4 p-4 bg-primary-50 rounded-lg border-l-4 border-primary-500 transition-all duration-300 hover:shadow-md"
+          >
+            <div class="flex items-center justify-between">
+              <div>
+                <label class="block text-sm font-medium text-primary-800 mb-1"
+                  >Automatski izračunata ukupna cena</label
+                >
+                <p class="text-xs text-gray-600">
+                  Računa se automatski na osnovu unetih stavki
+                </p>
+              </div>
+              <div class="text-2xl font-bold text-primary-800">
+                {{ formatPrice(totalPrice) }} RSD
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="mt-4 p-4 bg-primary-50 rounded-lg border-l-4 border-primary-500 transition-all duration-300 hover:shadow-md"
+          >
+            <label class="block text-sm font-medium text-primary-800 mb-2"
+              >Ukupna cena (ručni unos)</label
+            >
+            <div class="flex items-center">
+              <input
+                type="number"
+                class="flex-grow px-4 py-3 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                [(ngModel)]="formData.manualTotal"
+                name="manualTotal"
+                placeholder="Unesite ukupnu cenu ručno"
+              />
+              <span class="ml-2 text-sm text-gray-600">RSD</span>
+            </div>
+            <p class="mt-2 text-xs text-gray-600">
+              *Ukoliko unesete vrednost, ona će biti korišćena umesto zbira
+              stavki iz tabele
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <h3 class="text-lg font-semibold text-gray-800">Napomene</h3>
+            <div
+              class="h-0.5 flex-grow bg-gradient-to-r from-primary-500 to-transparent ml-3"
+            ></div>
+          </div>
+
+          <div class="space-y-2">
+            <div
+              *ngFor="let note of formData.notes; let i = index"
+              class="flex items-center px-4 py-2 rounded-lg bg-yellow-50 border border-yellow-200 hover:shadow-md transition-all duration-200"
+            >
+              <span class="flex-grow text-gray-700">{{ note }}</span>
+              <button
+                type="button"
+                class="ml-4 p-1 rounded-full bg-red-100 text-red-600 hover:bg-red-200 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-colors duration-200"
+                (click)="removeNote(i)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex space-x-2">
+            <input
+              class="flex-grow px-4 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+              [(ngModel)]="newNote"
+              name="newNote"
+              placeholder="Unesite novu napomenu..."
+            />
+            <button
+              type="button"
+              class="flex items-center px-4 py-2 rounded-lg bg-primary-500 hover:bg-primary-600 text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-200"
+              (click)="addNote()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 mr-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                />
+              </svg>
+              Dodaj
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center">
+            <h3 class="text-lg font-semibold text-gray-800">Klijent</h3>
+            <div
+              class="h-0.5 flex-grow bg-gradient-to-r from-primary-500 to-transparent ml-3"
+            ></div>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-primary-50 rounded-lg"
+          >
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Naziv</label
+              >
+              <input
+                class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                [(ngModel)]="formData.clientName"
+                name="clientName"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Adresa</label
+              >
+              <input
+                class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                [(ngModel)]="formData.clientAddress"
+                name="clientAddress"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Poštanski broj</label
+              >
+              <input
+                class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                [(ngModel)]="formData.clientPostalCode"
+                name="clientPostalCode"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Grad</label
+              >
+              <input
+                class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                [(ngModel)]="formData.clientCity"
+                name="clientCity"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >PIB</label
+              >
+              <input
+                class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                [(ngModel)]="formData.clientTaxId"
+                name="clientTaxId"
+                required
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >Matični broj</label
+              >
+              <input
+                class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+                [(ngModel)]="formData.clientCompanyId"
+                name="clientCompanyId"
+                required
+              />
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-primary-50 rounded-lg"
+        >
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Broj ponude</label
+            >
+            <input
+              class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+              [(ngModel)]="formData.offerNumber"
+              name="offerNumber"
+              required
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1"
+              >Datum izdavanja</label
+            >
+            <input
+              type="date"
+              class="w-full px-3 py-2 rounded-lg border-gray-300 focus:ring-primary-500 focus:border-primary-500 shadow-sm"
+              [(ngModel)]="formData.issueDate"
+              name="issueDate"
+              required
+            />
+          </div>
+        </div>
+
+        <div
+          *ngIf="errorMessage"
+          class="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 animate-pulse"
+        >
+          {{ errorMessage }}
+        </div>
+
+        <div class="flex justify-between pt-4">
+          <a
+            routerLink="/"
+            class="inline-flex items-center px-5 py-2 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-200 transition-colors duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Nazad na početnu
+          </a>
+          <button
+            type="submit"
+            class="submit-btn-orange flex items-center px-6 py-3 rounded-xl bg-gradient-to-r from-primary-600 to-primary-800 hover:from-primary-700 hover:to-primary-900 text-white font-medium focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 disabled:opacity-70"
+            [disabled]="isLoading"
+          >
+            <span *ngIf="isLoading" class="mr-2">
+              <svg
+                class="animate-spin h-5 w-5 text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  class="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  stroke-width="4"
+                ></circle>
+                <path
+                  class="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                ></path>
+              </svg>
+            </span>
+            <span class="text-lg">Generiši PDF</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 ml-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="mt-8 text-center text-gray-500">
+      <p>© {{ currentYear }} GM-HID</p>
+    </div>
+  </div>
+</div>

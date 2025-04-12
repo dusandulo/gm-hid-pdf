@@ -1,0 +1,134 @@
+<div
+  class="min-h-screen bg-gradient-to-br from-gray-50 to-orange-50 flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 animate-fade-in"
+>
+  <div class="max-w-3xl w-full">
+    <div class="flex flex-col items-center mb-12">
+      <img src="assets/logo.png" alt="Logo" class="h-24 mb-4 animate-float" />
+      <h1 class="text-4xl font-bold text-center mb-2">
+        <span
+          class="bg-gradient-to-r from-orange-600 to-orange-700 bg-clip-text text-transparent"
+          >PDF Generator</span
+        >
+      </h1>
+      <p class="text-gray-600 text-center max-w-md">
+        Brzo i jednostavno generisanje poslovne dokumentacije
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- Ponuda Card -->
+      <div class="option-card group" routerLink="/ponuda">
+        <div
+          class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group-hover:border-orange-300"
+        >
+          <div class="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
+          <div class="p-6 sm:p-8">
+            <div
+              class="flex items-center justify-center h-24 w-24 rounded-full bg-orange-100 text-orange-600 mx-auto mb-6 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">
+              Generiši ponudu
+            </h2>
+            <p class="text-gray-600 text-center">
+              Kreirajte profesionalnu ponudu za vaše klijente sa detaljnim
+              stavkama i uslovima
+            </p>
+            <div class="mt-8 flex justify-center">
+              <button
+                class="px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg flex items-center"
+              >
+                <span>Započni</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Racun Card -->
+      <div class="option-card group" routerLink="/racun">
+        <div
+          class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-2xl group-hover:border-orange-300"
+        >
+          <div class="h-2 bg-gradient-to-r from-orange-500 to-orange-600"></div>
+          <div class="p-6 sm:p-8">
+            <div
+              class="flex items-center justify-center h-24 w-24 rounded-full bg-orange-100 text-orange-600 mx-auto mb-6 transition-all duration-300 group-hover:bg-orange-500 group-hover:text-white"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-12 w-12"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-2">
+              Generiši račun
+            </h2>
+            <p class="text-gray-600 text-center">
+              Kreirajte detaljne račune sa preciznim obračunom i propisanim
+              podacima
+            </p>
+            <div class="mt-8 flex justify-center">
+              <button
+                class="px-6 py-3 rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 text-white font-medium transition-all duration-300 transform hover:translate-y-[-2px] hover:shadow-lg flex items-center"
+              >
+                <span>Započni</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 text-center text-gray-500">
+      <p>© {{ currentYear }} GM-HID</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,119 @@
+:host {
+  display: block;
+  --orange-50: #fff7ed;
+  --orange-100: #ffedd5;
+  --orange-200: #fed7aa;
+  --orange-300: #fdba74;
+  --orange-400: #fb923c;
+  --orange-500: #f97316;
+  --orange-600: #ea580c;
+  --orange-700: #c2410c;
+  --orange-800: #9a3412;
+  --orange-900: #7c2d12;
+  --orange-950: #431407;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes orangePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+}
+
+.submit-btn-orange {
+  animation: orangePulse 2s infinite;
+}
+
+:host ::ng-deep {
+  .from-orange-600 {
+    --tw-gradient-from: #ea580c;
+  }
+  .to-orange-800 {
+    --tw-gradient-to: #9a3412;
+  }
+  .bg-orange-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 237, 213, var(--tw-bg-opacity));
+  }
+  .text-orange-300 {
+    --tw-text-opacity: 1;
+    color: rgba(253, 186, 116, var(--tw-text-opacity));
+  }
+  .text-orange-700 {
+    --tw-text-opacity: 1;
+    color: rgba(194, 65, 12, var(--tw-text-opacity));
+  }
+  .hover\:bg-orange-200:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(254, 215, 170, var(--tw-bg-opacity));
+  }
+
+  .bg-primary-50 {
+    background-color: var(--orange-50) !important;
+  }
+  
+  .border-primary-500 {
+    border-color: var(--orange-500) !important;
+  }
+  
+  .text-primary-800 {
+    color: var(--orange-800) !important;
+  }
+  
+  .from-primary-500 {
+    --tw-gradient-from: var(--orange-500) !important;
+  }
+  
+  .from-primary-600 {
+    --tw-gradient-from: var(--orange-600) !important;
+  }
+  
+  .to-primary-800 {
+    --tw-gradient-to: var(--orange-800) !important;
+  }
+  
+  .from-primary-700 {
+    --tw-gradient-from: var(--orange-700) !important;
+  }
+  
+  .to-primary-900 {
+    --tw-gradient-to: var(--orange-900) !important;
+  }
+  
+  .focus\:ring-primary-500:focus {
+    --tw-ring-color: var(--orange-500) !important;
+  }
+  
+  .focus\:border-primary-500:focus {
+    border-color: var(--orange-500) !important;
+  }
+  
+  .bg-primary-500 {
+    background-color: var(--orange-500) !important;
+  }
+  
+  .hover\:bg-primary-600:hover {
+    background-color: var(--orange-600) !important;
+  }
+}

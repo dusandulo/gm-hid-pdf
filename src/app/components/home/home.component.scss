@@ -1,0 +1,55 @@
+
+:host {
+  display: block;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.option-card {
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+:host ::ng-deep {
+  .from-orange-500 {
+    --tw-gradient-from: #f97316;
+  }
+  .to-orange-600 {
+    --tw-gradient-to: #ea580c;
+  }
+  .to-orange-700 {
+    --tw-gradient-to: #c2410c;
+  }
+  .bg-orange-100 {
+    --tw-bg-opacity: 1;
+    background-color: rgba(255, 237, 213, var(--tw-bg-opacity));
+  }
+  .text-orange-600 {
+    --tw-text-opacity: 1;
+    color: rgba(234, 88, 12, var(--tw-text-opacity));
+  }
+  .group-hover\:bg-orange-500:hover {
+    --tw-bg-opacity: 1;
+    background-color: rgba(249, 115, 22, var(--tw-bg-opacity));
+  }
+  .group-hover\:border-orange-300:hover {
+    --tw-border-opacity: 1;
+    border-color: rgba(253, 186, 116, var(--tw-border-opacity));
+  }
+}
